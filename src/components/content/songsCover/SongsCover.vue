@@ -1,0 +1,105 @@
+<template>
+  <div class="songsCover">
+    <div class="cover-top">
+      <img :src="coverImage" alt=""/>
+      <div class="cover sprite_covor">
+        <div class="info sprite_covor">
+            <span>
+              <i class="sprite_icon erji"></i>
+              {{playCount}}
+            </span>
+          <i class="play sprite_icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="cover-bottom text-nowrap">
+      {{info.name}}
+    </div>
+    <div class="cover-source text-nowrap">
+      {{info.copywriter || info.creator.nickname}}
+    </div>
+  </div>
+</template>
+
+<script>
+  import {getCount,getSizeImage} from "utils/format-utils";
+  export default {
+    name: "SongsCover",
+    data(){
+      return{
+        coverImage:[],
+        playCount:[]
+      }
+    },
+    props:{
+      info:{
+        type:Object,
+        default(){
+          return {}
+        }
+      }
+    },
+    created() {
+      this.coverImage = getSizeImage(this.info.picUrl,140);
+      this.playCount = getCount(this.info.playCount);
+      // console.log(this.playCount);
+      // console.log(this.info);
+    }
+  }
+</script>
+
+<style scoped>
+  .songsCover{
+    width: 140px;
+    margin: 20px  20px 20px;
+  }
+  .cover-top{
+    position: relative;
+  }
+  .cover-top img{
+    width: 140px;
+    height: 140px;
+  }
+  .cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: 0 0;
+  }
+  .info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-position: 0 -537px;
+    color: #ccc;
+    height: 27px;
+  }
+  .erji {
+    margin-right: 5px;
+    display: inline-block;
+    width: 14px;
+    height: 11px;
+    background-position: 0 -24px;
+  }
+  .play {
+    display: inline-block;
+    width: 16px;
+    height: 17px;
+    background-position: 0 0;
+  }
+  .cover-bottom {
+    font-size: 14px;
+    color: #000;
+    margin-top: 5px;
+  }
+  .cover-source {
+    color: #666;
+  }
+</style>
