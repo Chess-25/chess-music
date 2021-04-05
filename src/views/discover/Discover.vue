@@ -20,7 +20,7 @@
   export default {
     name: "Discover",
     components:{
-      Footer
+      Footer,
     },
     data(){
       return{
